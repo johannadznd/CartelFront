@@ -3,12 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MainPageComponent } from './main-page/main-page.component';
+import { HomeComponent } from './Template/home/home.component';
+import { OrderComponent } from './Template/order/order.component';
+import { CategoryComponent } from './Template/category/category.component';
+import { ProductComponent } from './Template/product/product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainPageComponent
+    HomeComponent,
+    OrderComponent,
+    CategoryComponent,
+    ProductComponent,
   ],
   imports: [
     BrowserModule,
