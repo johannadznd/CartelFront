@@ -1,13 +1,13 @@
 <template>
   <div>
-    test home
+    test main
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Home",
+  name: "Main",
   data() {
     return {};
   },
