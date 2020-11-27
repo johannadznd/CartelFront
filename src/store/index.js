@@ -6,9 +6,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    user: any,
   },
   mutations: {
-    
+
     async getAllProducts(state) {
       axios
         .get("product/tous")
@@ -24,7 +25,7 @@ export default new Vuex.Store({
       axios
         .get("product/category/" + category)
         .then(response => {
-          console.log(response);
+          state.user.push(response.data);
         })
         .catch(function (error) {
           console.log(error);
@@ -45,7 +46,23 @@ export default new Vuex.Store({
         .catch(function (error) {
           console.log(error);
         });
-    }
+    },
+
+    async postOrder(state, price, adress) {
+      axios
+        .post("cardorder/create", {
+          price: price,
+          creation: Date.now(),
+          adress: adress,
+          user: state.user
+        })
+        .then(response => {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
   },
   actions: {
   },
