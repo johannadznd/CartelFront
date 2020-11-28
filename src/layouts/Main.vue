@@ -1,21 +1,28 @@
 <template>
-  <div>
-    <NavBar></NavBar>
-    test main
-    <router-view></router-view>
-  </div>
+  <v-app>
+    <NavBar />
+    <v-main>
+
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
+    </v-main>
+
+    <Footer />
+  </v-app>
 </template>
 
 <script>
-import NavBar from "@/components/NavBar";
-
+import Footer from "@/components/Footer.vue"
+import NavBar from "@/components/NavBar.vue"
 export default {
   name: "Main",
+  components: {
+      Footer,
+      NavBar,
+  },
   data() {
     return {};
-  },
-  components: {
-    NavBar ,
   },
 };
 </script>
