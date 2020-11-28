@@ -14,6 +14,9 @@ export default {
   },
   mounted: async function () {
     store.commit("getAllProductsWithCategory", "carpet");
+
+    store.commit("postUser", ["firstName", "lastname", "email", "adress"]);
+    store.commit("postOrder", "price");
   },
 };
 </script>

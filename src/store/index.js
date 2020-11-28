@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: any,
+    user: Object,
   },
   mutations: {
 
@@ -14,7 +14,7 @@ export default new Vuex.Store({
       axios
         .get("product/tous")
         .then(response => {
-          console.log(response);
+          return response.data;
         })
         .catch(function (error) {
           console.log(error);
@@ -25,6 +25,22 @@ export default new Vuex.Store({
       axios
         .get("product/category/" + category)
         .then(response => {
+          return response.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+
+    async postUser(state, user) {
+      axios
+        .post("user/create", {
+          firstName: user[0],
+          lastName: user[1],
+          email: user[2],
+          adress: user[3]
+      })
+        .then(response => {
           state.user.push(response.data);
         })
         .catch(function (error) {
@@ -32,40 +48,20 @@ export default new Vuex.Store({
         });
     },
 
-    async postUser(state, firstName, lastName, email, adress) {
-      axios
-        .post("user/create", {
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          adress: adress,
-        })
-        .then(response => {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-
-    async postOrder(state, price, adress) {
+    async postOrder(state, price) {
       axios
         .post("cardorder/create", {
           price: price,
-          creation: Date.now(),
-          adress: adress,
-          user: state.user
+          creation: new Date(),
+          adress: "adress",
+          user: "this.state.user"
         })
         .then(response => {
-          console.log(response);
+          return response;
         })
         .catch(function (error) {
           console.log(error);
         });
     },
   },
-  actions: {
-  },
-  modules: {
-  }
 })
