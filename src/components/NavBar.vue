@@ -6,15 +6,15 @@
 
     <v-spacer></v-spacer>
   </v-app-bar>
-</template>
+  </template>
 
 <script>
 export default {
   name: "NavBar",
   data() {
     return {
-
     };
   },
 };
 </script>
+
