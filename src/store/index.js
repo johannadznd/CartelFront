@@ -6,7 +6,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: Object,
+    user: [],
+    products: [],
   },
   mutations: {
 
@@ -21,11 +22,12 @@ export default new Vuex.Store({
         });
     },
 
-    async getAllProductsWithCategory(state, category) {
+    getAllProductsWithCategory(state, category) {
       axios
         .get("product/category/" + category)
         .then(response => {
-          return response.data;
+          console.log(response);
+          state.products = response;
         })
         .catch(function (error) {
           console.log(error);
