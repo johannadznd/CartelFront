@@ -32,7 +32,7 @@ export default new Vuex.Store({
         });
     },
 
-    async postUser(state, user) {
+    postUser(state, user) {
       axios
         .post("user/create", {
           firstName: user[0],
@@ -48,7 +48,7 @@ export default new Vuex.Store({
         });
     },
 
-    async postOrder(state, price) {
+    postOrder(state, price) {
       axios
         .post("cardorder/create", {
           price: price,

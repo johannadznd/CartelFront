@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-content>
+    <v-main>
       <div class="contenant">
         <v-img height="600" src="../assets/TopImg.png">
           <v-row align="center" justify="center">
@@ -77,7 +77,7 @@
             <v-col class="ml-16 pt-5">
               <h2>Boîte pour cartes</h2>
               <p class="mt-5">
-                Venez regarder tous nos boîtes à cartes et personnalisez celui
+                Venez regarder toutes nos boîtes à cartes et personnalisez celles
                 de vos rêves .
               </p>
               <v-btn
@@ -86,7 +86,7 @@
                 class="mt-5"
                 color="#32374B"
                 elevation="2"
-                >Découvrir les boîte</v-btn
+                >Découvrir les boîtes</v-btn
               >
             </v-col>
           </v-row>
@@ -121,7 +121,7 @@
           {{ setProducts() }}
         </div>
       </div>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 
@@ -164,7 +164,7 @@ export default {
     testContainProductsInput(products) {
       var productsFiltered = [];
       for (var i = 0; i < products.length; i++) {
-        if (this.select == null) {
+        if (this.select == null || this.select == undefined) {
           for (var j = 0; j < this.items.length; j++) {
             if (products[i].name == this.items[j]) {
               productsFiltered.push(products[i]);
