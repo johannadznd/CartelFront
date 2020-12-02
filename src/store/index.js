@@ -10,12 +10,11 @@ export default new Vuex.Store({
     products: [],
   },
   mutations: {
-
     async getAllProducts(state) {
       axios
         .get("product/tous")
         .then(response => {
-          return response.data;
+          state.products = response;
         })
         .catch(function (error) {
           console.log(error);
@@ -26,7 +25,6 @@ export default new Vuex.Store({
       axios
         .get("product/category/" + category)
         .then(response => {
-          console.log(response);
           state.products = response;
         })
         .catch(function (error) {
@@ -41,7 +39,7 @@ export default new Vuex.Store({
           lastName: user[1],
           email: user[2],
           adress: user[3]
-      })
+        })
         .then(response => {
           state.user.push(response.data);
         })

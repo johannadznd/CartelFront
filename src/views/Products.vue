@@ -53,7 +53,7 @@
           md="4"
           lg="3"
         >
-          <ProductCard :product="item" />
+          <ProductCard :product="item"/>
         </v-col>
       </v-row>
     </template>

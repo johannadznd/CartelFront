@@ -6,10 +6,10 @@
       {{ product.name }}
     </v-card-title>
 
-    <v-card-subtitle> {{ product.price }} ‎€ </v-card-subtitle>
+    <v-card-subtitle class="d-flex"> {{ product.price }} ‎€ </v-card-subtitle>
 
     <router-link
-      :to="{ name: productDescription, params: { category: product.id } }"
+      :to="{ name: productDescription, params: { idProduit: product.id } }"
       class="text-decoration-none"
     >
       <v-card-actions>
