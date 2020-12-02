@@ -8,8 +8,30 @@ export default new Vuex.Store({
   state: {
     user: [],
     products: [],
+    order: [],
+  },
+  actions: {
+    async postUser(context, user) {
+      await axios
+        .post("user/create", {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          adress: user.address,
+        })
+        .then(response => {
+          context.commit("setUser", response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+    }
   },
   mutations: {
+    async setUser(state, user) {
+      state.user = user;
+    },
     async getAllProducts(state) {
       axios
         .get("product/tous")
@@ -32,20 +54,21 @@ export default new Vuex.Store({
         });
     },
 
-    postUser(state, user) {
-      axios
+    async postUser(state, user) {
+      await axios
         .post("user/create", {
-          firstName: user[0],
-          lastName: user[1],
-          email: user[2],
-          adress: user[3]
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          adress: user.address,
         })
         .then(response => {
-          state.user.push(response.data);
+          state.user = response.data;
         })
         .catch(function (error) {
           console.log(error);
         });
+      return state.user;
     },
 
     postOrder(state, price) {
@@ -54,10 +77,10 @@ export default new Vuex.Store({
           price: price,
           creation: new Date(),
           adress: "adress",
-          user: "this.state.user"
+          user: state.user
         })
         .then(response => {
-          return response;
+          state.order = response.data;
         })
         .catch(function (error) {
           console.log(error);

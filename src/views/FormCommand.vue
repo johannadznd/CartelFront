@@ -1,67 +1,94 @@
 <template>
   <v-row align="center" justify="center">
-    <v-form ref="form" v-model="valid" lazy-validation  style="min-width: 300px; width: 40vw;">
+    <v-form
+      ref="form"
+      v-model="valid"
+      lazy-validation
+      style="min-width: 300px; width: 40vw"
+    >
       <v-text-field
-        v-model="firstName"
+        v-model="user.firstName"
         :rules="[rules.required]"
-        label="first name"
+        label="prénom"
         required
       ></v-text-field>
 
       <v-text-field
-        v-model="lastName"
+        v-model="user.lastName"
         :rules="[rules.required]"
-        label="last name"
+        label="nom"
         required
       ></v-text-field>
 
       <v-text-field
-        v-model="email"
+        v-model="user.email"
         :rules="[rules.required, rules.email]"
-        label="E-mail"
+        label="email pour payement paypal"
         required
       ></v-text-field>
 
-      <v-select
-        v-model="select"
-        :items="items"
-        :rules="[(v) => !!v || 'Item is required']"
-        label="Item"
+      <v-text-field
+        v-model="user.address"
+        :rules="[rules.required]"
+        label="adresse de livraison"
         required
-      ></v-select>
+      ></v-text-field>
 
-      <v-btn large class="ma-5" color="white" elevation="2">annuler</v-btn>
-      <v-btn
-        style="color: white"
-        large
-        class="ma-5"
-        color="#32374B"
-        elevation="2"
-        :disabled="!valid"
-        @click="submit"
-        >commander</v-btn
-      >
+      <center>
+        <v-btn
+          large
+          class="ma-5"
+          color="white"
+          elevation="2"
+          style="width: 140px"
+          >annuler</v-btn
+        >
+        <v-btn
+          style="color: white; width: 140px"
+          large
+          class="ma-5"
+          color="#32374B"
+          elevation="2"
+          :disabled="!valid"
+          @click="createCommand()"
+          >commander</v-btn
+        >
+      </center>
     </v-form>
   </v-row>
 </template>
 
 <script>
+import store from "@/store/index.js";
 export default {
+  watch: {
+    test: function (value) {
+      if (this.getuser != undefined) {
+        console.log("dsfsdfsd");
+      }
+      console.log("rererer");
+    },
+  },
   name: "FormCommand",
+  store: store,
   data() {
     return {
       valid: false,
       rules: {
-        required: value => !!value || "Requis",
-        email: value => {
+        required: (value) => !!value || "Requis",
+        email: (value) => {
           const pattern = /.+@.+\..+/;
           return pattern.test(value) || "Invalid e-mail";
         },
       },
-      lastName: "",
-      firstName: "",
       select: null,
-      items: ["Item 1", "Item 2", "Item 3", "Item 4"],
+      user: {
+        firstName: "firstName",
+        lastName: "lastName",
+        email: "email@gmail.com",
+        address: "214 rue de la cheval",
+      },
+      store: "",
     };
   },
   methods: {
@@ -74,6 +101,16 @@ export default {
     resetValidation() {
       this.$refs.form.resetValidation();
     },
+    createCommand() {
+      store.dispatch("postUser", this.user).then(() => (
+          store.commit("postOrder", "12")
+      ));
+    },
+  },
+  computed: {
+    // getuser() {
+    //   return store.state.user;
+    // },
   },
 };
 </script>
