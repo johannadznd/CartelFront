@@ -25,66 +25,57 @@ export default new Vuex.Store({
         .catch(function (error) {
           console.log(error);
         });
-
-    }
-  },
-  mutations: {
-    async setUser(state, user) {
-      state.user = user;
     },
-    async getAllProducts(state) {
+    async getAllProducts(context) {
       axios
         .get("product/tous")
         .then(response => {
-          state.products = response;
+          context.commit("setProducts", response.data);
         })
         .catch(function (error) {
           console.log(error);
         });
     },
-
-    getAllProductsWithCategory(state, category) {
+    async getAllProductsWithCategory(context, category) {
       axios
         .get("product/category/" + category)
         .then(response => {
-          state.products = response;
+          context.commit("setProducts", response.data);
         })
         .catch(function (error) {
           console.log(error);
         });
     },
-
-    async postUser(state, user) {
-      await axios
-        .post("user/create", {
-          firstName: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-          adress: user.address,
-        })
-        .then(response => {
-          state.user = response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      return state.user;
-    },
-
-    postOrder(state, price) {
+    async postOrder({context, state}, price) {
       axios
         .post("cardorder/create", {
           price: price,
           creation: new Date(),
           adress: "adress",
-          user: state.user
+          user: state.user,
+          products: state.order
         })
         .then(response => {
-          state.order = response.data;
+          console.log(response.data);
         })
         .catch(function (error) {
           console.log(error);
         });
+    },
+  },
+  mutations: {
+    async setUser(state, user) {
+      state.user = user;
+    },
+    async setProducts(state, products) {
+      state.products = products;
+    },
+    async setOrder(state, order) {
+      state.order = order;
+    },
+    async addProductToOrder(state, product) {
+      state.order.push(product);
+      console.log(state.order);
     },
   },
 })

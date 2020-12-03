@@ -133,7 +133,7 @@ export default {
       return this.$route.params.category;
     },
     products() {
-      return store.state.products.data;
+      return store.state.products;
     },
     numberOfPages() {
       return Math.ceil(this.items.length / this.itemsPerPage);
@@ -143,7 +143,7 @@ export default {
     },
   },
   mounted: async function () {
-    store.commit("getAllProductsWithCategory", this.category);
+    store.dispatch("getAllProductsWithCategory", this.category);
   },
 
   methods: {

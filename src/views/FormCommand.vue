@@ -33,7 +33,6 @@
         label="adresse de livraison"
         required
       ></v-text-field>
-
       <center>
         <v-btn
           large
@@ -61,14 +60,6 @@
 <script>
 import store from "@/store/index.js";
 export default {
-  watch: {
-    test: function (value) {
-      if (this.getuser != undefined) {
-        console.log("dsfsdfsd");
-      }
-      console.log("rererer");
-    },
-  },
   name: "FormCommand",
   store: store,
   data() {
@@ -102,15 +93,15 @@ export default {
       this.$refs.form.resetValidation();
     },
     createCommand() {
-      store.dispatch("postUser", this.user).then(() => (
-          store.commit("postOrder", "12")
-      ));
+      store
+        .dispatch("postUser", this.user)
+        .then(() => store.dispatch("postOrder", "12"));
     },
   },
   computed: {
-    // getuser() {
-    //   return store.state.user;
-    // },
+    getuser() {
+      return store.state.user;
+    },
   },
 };
 </script>

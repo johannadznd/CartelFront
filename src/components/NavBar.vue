@@ -35,8 +35,16 @@
           <v-toolbar-title
             class="d-flex justify-center align-center white--text"
             style="width: 100%"
-            >Cartel</v-toolbar-title
-          >
+            >Cartel
+          </v-toolbar-title>
+        </router-link>
+
+        <router-link :to="{ name: 'FormCommand' }" class="text-decoration-none">
+          <v-toolbar-title
+            class="d-flex justify-center align-center white--text"
+            style="width: 100%"
+            >Acheter
+          </v-toolbar-title>
         </router-link>
       </button>
     </div>
@@ -74,7 +82,7 @@ import store from "@/store/index.js";
 export default {
   methods: {
     getAllProducts: function (category) {
-      store.commit("getAllProductsWithCategory", category);
+      store.dispatch("getAllProductsWithCategory", category);
     },
   },
   name: "NavBar",

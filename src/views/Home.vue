@@ -77,8 +77,8 @@
             <v-col class="ml-16 pt-5">
               <h2>Boîte pour cartes</h2>
               <p class="mt-5">
-                Venez regarder toutes nos boîtes à cartes et personnalisez celles
-                de vos rêves .
+                Venez regarder toutes nos boîtes à cartes et personnalisez
+                celles de vos rêves .
               </p>
               <v-btn
                 style="color: white"
@@ -181,11 +181,11 @@ export default {
   },
   computed: {
     getProducts() {
-      return store.state.products.data;
+      return store.state.products;
     },
   },
   mounted: async function () {
-    store.commit("getAllProducts");
+    store.dispatch("getAllProducts");
   },
 };
 </script>
