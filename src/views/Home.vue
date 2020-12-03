@@ -14,7 +14,7 @@
               flat
               hide-no-data
               hide-details
-              label="What state are you from?"
+              label="rechercher un produit"
               color="blue"
               solo
               clearable
