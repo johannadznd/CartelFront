@@ -91,20 +91,8 @@
             </v-col>
           </v-row>
         </v-container>
-        <v-container v-if="search != null && search.length != 0">
-          <v-row v-if="select == null">
-            <v-col
-              v-for="item in testContainProductsInput(getProducts)"
-              :key="item.name"
-              cols="12"
-              sm="6"
-              md="4"
-              lg="3"
-            >
-              <ProductCard :product="item" />
-            </v-col>
-          </v-row>
-          <v-row v-if="select != null">
+        <v-container v-else>
+          <v-row>
             <v-col
               v-for="item in testContainProductsInput(getProducts)"
               :key="item.name"
@@ -117,9 +105,6 @@
             </v-col>
           </v-row>
         </v-container>
-        <!-- <div v-if="getProducts != undefined && products.length == 0">
-          {{ setProducts() }}
-        </div> -->
       </div>
     </v-main>
   </v-app>
@@ -164,7 +149,7 @@ export default {
     testContainProductsInput(products) {
       var productsFiltered = [];
       for (var i = 0; i < products.length; i++) {
-        if (this.select == null || this.select == undefined) {
+        if (this.select == null) {
           for (var j = 0; j < this.items.length; j++) {
             if (products[i].name == this.items[j]) {
               productsFiltered.push(products[i]);
@@ -184,7 +169,7 @@ export default {
       return store.state.products;
     },
   },
-  mounted: async function () {
+  mounted: function () {
     store.dispatch("getAllProducts").then(() => this.setProducts());
   },
 };

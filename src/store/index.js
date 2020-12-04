@@ -27,7 +27,7 @@ export default new Vuex.Store({
         });
     },
     async getAllProducts(context) {
-      axios
+      await axios
         .get("product/tous")
         .then(response => {
           context.commit("setProducts", response.data);
@@ -37,7 +37,7 @@ export default new Vuex.Store({
         });
     },
     async getAllProductsWithCategory(context, category) {
-      axios
+      await axios
         .get("product/category/" + category)
         .then(response => {
           context.commit("setProducts", response.data);
@@ -47,7 +47,7 @@ export default new Vuex.Store({
         });
     },
     async postOrder({context, state}, price) {
-      axios
+      await axios
         .post("cardorder/create", {
           price: price,
           creation: new Date(),
@@ -67,7 +67,7 @@ export default new Vuex.Store({
     async setUser(state, user) {
       state.user = user;
     },
-    async setProducts(state, products) {
+    setProducts(state, products) {
       state.products = products;
     },
     async setOrder(state, order) {
@@ -75,7 +75,6 @@ export default new Vuex.Store({
     },
     async addProductToOrder(state, product) {
       state.order.push(product);
-      console.log(state.order);
     },
   },
 })
