@@ -117,9 +117,9 @@
             </v-col>
           </v-row>
         </v-container>
-        <div v-if="getProducts != undefined && products.length == 0">
+        <!-- <div v-if="getProducts != undefined && products.length == 0">
           {{ setProducts() }}
-        </div>
+        </div> -->
       </div>
     </v-main>
   </v-app>
@@ -185,7 +185,7 @@ export default {
     },
   },
   mounted: async function () {
-    store.dispatch("getAllProducts");
+    store.dispatch("getAllProducts").then(() => this.setProducts());
   },
 };
 </script>
