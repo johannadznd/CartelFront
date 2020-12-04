@@ -77,27 +77,32 @@
       </v-btn>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" absolute right temporary height="400">
+    <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      right
+      temporary
+      height="45vh"
+      width="17vw"
+    >
       <v-list-item>
-        <v-list-item-avatar>
-          <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
-        </v-list-item-avatar>
-
         <v-list-item-content>
-          <v-list-item-title>John Leider</v-list-item-title>
+          <v-list-item-title>Votre commande</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
       <v-divider></v-divider>
 
       <v-list dense>
-        <v-list-item v-for="item in categories" :key="item.title" link>
+
+                {{ organizingProducts(order) }}
+        <v-list-item v-for="item in order" :key="item.name" link>
           <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon>{{ item.name }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>{{ item.price }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -108,11 +113,6 @@
 <script>
 import store from "@/store/index.js";
 export default {
-  methods: {
-    getAllProducts: function (category) {
-      store.dispatch("getAllProductsWithCategory", category);
-    },
-  },
   name: "NavBar",
   store: store,
   data() {
@@ -141,6 +141,28 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    order() {
+      return store.state.order;
+    },
+  },
+  methods: {
+    getAllProducts: function (category) {
+      store.dispatch("getAllProductsWithCategory", category);
+    },
+    organizingProducts: function (products) {
+      var organizeProducts = [];
+      for (let i = 0; i < products.length; i++) {
+        console.log(products[i].name);
+        // if(products[i].name ) {
+
+        // }
+      }
+
+
+      return organizeProducts;
+    },
   },
 };
 </script>
