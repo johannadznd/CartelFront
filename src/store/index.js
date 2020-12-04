@@ -64,17 +64,18 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    async setUser(state, user) {
+    setUser(state, user) {
       state.user = user;
     },
     setProducts(state, products) {
       state.products = products;
     },
-    async setOrder(state, order) {
+    setOrder(state, order) {
       state.order = order;
     },
-    async addProductToOrder(state, product) {
+    addProductToOrder(state, product) {
       state.order.push(product);
+      console.log(state.order);
     },
   },
 })

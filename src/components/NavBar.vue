@@ -73,7 +73,7 @@
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-icon @click="drawer = true">mdi-cart</v-icon>
+        <v-icon large @click="drawer = true">mdi-cart</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -84,28 +84,70 @@
       temporary
       height="45vh"
       width="17vw"
+      style="min-width: 300px; min-height: 300px"
     >
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title>Votre commande</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-divider></v-divider>
-
-      <v-list dense>
-
-                {{ organizingProducts(order) }}
-        <v-list-item v-for="item in order" :key="item.name" link>
-          <v-list-item-icon>
-            <v-icon>{{ item.name }}</v-icon>
-          </v-list-item-icon>
-
+      <center>
+        <v-list-item>
           <v-list-item-content>
-            <v-list-item-title>{{ item.price }}</v-list-item-title>
+            <v-list-item-title
+              >Votre commande {{ order.length }}</v-list-item-title
+            >
           </v-list-item-content>
         </v-list-item>
-      </v-list>
+
+        <v-divider></v-divider>
+
+        <v-list dense>
+          <v-list-item
+            v-for="item in organizingProducts(order)"
+            :key="item.name"
+          >
+            <v-card class="ma-2">
+              <v-img :src="item.picture" :lazy-src="item.picture"> </v-img>
+              <div>
+                <v-list-item-content>
+                  <div>article : {{ item.name }} à {{ item.price }} €</div>
+                  <div class="d-flex justify-center align-center">
+                    quantité :
+
+                    <v-icon
+                      @click="removeOneItem(item)"
+                      large
+                      color="orange darken-2"
+                    >
+                      mdi-minus
+                    </v-icon>
+                    <div class="d-flex justify-center align-center">
+                      {{ item.number }}
+                    </div>
+
+                    <v-icon
+                      @click="addOneItem(item)"
+                      large
+                      color="orange darken-2"
+                    >
+                      mdi-plus
+                    </v-icon>
+                  </div>
+                </v-list-item-content>
+              </div>
+            </v-card>
+          </v-list-item>
+          <router-link
+            :to="{ name: 'FormCommand' }"
+            class="text-decoration-none"
+          >
+            <v-btn
+              style="color: white; width: 140px"
+              large
+              class="ma-5"
+              color="#32374B"
+              elevation="2"
+              >commander</v-btn
+            >
+          </router-link>
+        </v-list>
+      </center>
     </v-navigation-drawer>
   </div>
 </template>
@@ -153,15 +195,43 @@ export default {
     },
     organizingProducts: function (products) {
       var organizeProducts = [];
+      var founded = false;
+
       for (let i = 0; i < products.length; i++) {
-        console.log(products[i].name);
-        // if(products[i].name ) {
-
-        // }
+        founded = false;
+        for (let j = 0; j < organizeProducts.length; j++) {
+          if (products[i].name == organizeProducts[j].name) {
+            organizeProducts[j].number++;
+            founded = true;
+          }
+        }
+        if (founded == false) {
+          Object.defineProperty(products[i], "number", {
+            value: 1,
+            writable: true,
+          });
+          organizeProducts.push(products[i]);
+        }
       }
-
-
       return organizeProducts;
+    },
+    removeOneItem: function (product) {
+      var deleted = false;
+
+      for (let i = 0; i < this.order.length; i++) {
+        if (this.order[i].name == product.name && deleted == false) {
+          this.order.splice(i, 1);
+          deleted = true;
+        }
+      }
+      console.log(this.order);
+    },
+    addOneItem: function (product) {
+      var productToAdd = this.order.find(
+        (element) => element.name == product.name
+      );
+      console.log(productToAdd);
+      store.commit("addProductToOrder", productToAdd);
     },
   },
 };
