@@ -53,7 +53,7 @@ export default new Vuex.Store({
       await axios
         .get("product/category/" + category)
         .then(response => {
-          context.commit("setProduct", response.data);
+          context.commit("setProducts", response.data);
         })
         .catch(function (error) {
           console.log(error);

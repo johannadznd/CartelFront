@@ -9,12 +9,10 @@
     <v-card-subtitle class="d-flex"> {{ product.price }} ‎€ </v-card-subtitle>
 
     <router-link
-      :to="{ name: productDescription, params: { idProduit: product.id } }"
+      :to="{ name: 'Product', params: { id: product.id} }"
       class="text-decoration-none"
     >
-      <v-card-actions>
-        <v-btn color="grey white--text lighten-2" text @click="addToOrder(product)"> Acheter </v-btn>
-      </v-card-actions>
+        <v-btn color="grey white--text lighten-2" text> Acheter </v-btn>
     </router-link>
   </v-card>
 </template>
@@ -22,11 +20,8 @@
 <script>
 import store from '@/store/index.js';
 export default {
-  methods: {
-    addToOrder(product) {
-      store.commit('addProductToOrder', product);
-    },
-  },
+  
+
   name: "ProductCard",
   store: store,
   props: ["product"],
