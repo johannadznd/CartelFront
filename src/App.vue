@@ -15,8 +15,5 @@ export default {
   components: {
     Main,
   },
-  data: () => ({
-    //
-  }),
 };
 </script>

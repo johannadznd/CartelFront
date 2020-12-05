@@ -31,7 +31,9 @@ export default {
   store: store,
   props: ["product"],
   data() {
-    return {};
+    return {
+      
+    };
   },
 };
 </script>
