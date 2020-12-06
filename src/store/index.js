@@ -9,6 +9,7 @@ export default new Vuex.Store({
     user: [],
     products: [],
     order: [],
+    product:[],
   },
   actions: {
     async postUser(context, user) {
@@ -36,6 +37,18 @@ export default new Vuex.Store({
           console.log(error);
         });
     },
+
+    async getProductById(context, id ) {
+      await axios
+        .get("product/" + id)
+        .then(response => {
+          context.commit("setProduct", response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+
     async getAllProductsWithCategory(context, category) {
       await axios
         .get("product/category/" + category)
@@ -70,7 +83,13 @@ export default new Vuex.Store({
     setProducts(state, products) {
       state.products = products;
     },
+
+    setProduct(state, product) {
+      state.product = product;
+    },
+
     setOrder(state, order) {
+
       state.order = order;
     },
     addProductToOrder(state, product) {

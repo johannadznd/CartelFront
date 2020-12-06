@@ -34,14 +34,16 @@
                 Venez regarder tous nos tapis de jeux et personnalisez le tapis
                 de vos rêves.
               </p>
+              <router-link to="products/carpet" class="text-decoration-none">
               <v-btn
                 style="color: white"
                 x-large
-                class="mt-5"
+                class="mt-5 "
                 color="#32374B"
                 elevation="2"
-                >Découvrir les tapis</v-btn
-              >
+              
+                >Découvrir les tapis</v-btn>
+              </router-link>
             </v-col>
           </v-row>
 
@@ -52,14 +54,15 @@
                 Venez regarder tous nos protèges cartes et personnalisez celui
                 de vos rêves.
               </p>
+              <router-link to="products/sleeve" class="text-decoration-none">
               <v-btn
                 style="color: white"
                 x-large
                 class="mt-5"
                 color="#32374B"
                 elevation="2"
-                >Découvrir les protèges</v-btn
-              >
+                >Découvrir les protèges</v-btn>
+              </router-link>
             </v-col>
             <v-img
               max-height="500"
@@ -80,14 +83,15 @@
                 Venez regarder toutes nos boîtes à cartes et personnalisez
                 celles de vos rêves .
               </p>
+              <router-link to="products/box" class="text-decoration-none">
               <v-btn
                 style="color: white"
                 x-large
                 class="mt-5"
                 color="#32374B"
                 elevation="2"
-                >Découvrir les boîtes</v-btn
-              >
+                >Découvrir les boîtes</v-btn>
+              </router-link>
             </v-col>
           </v-row>
         </v-container>

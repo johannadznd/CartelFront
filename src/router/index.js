@@ -19,6 +19,12 @@ const routes = [
     name: 'product',
     component: () => import("../views/FormCommand.vue")
   },
+
+  {
+    path: '/product/:id',
+    name: 'Product',
+    component: () => import("../views/ProductDescription.vue")
+  },
 ]
 
 const router = new VueRouter({
