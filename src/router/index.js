@@ -16,7 +16,7 @@ const routes = [
   },
   {
     path: '/form/command',
-    name: 'FormCommand',
+    name: 'product',
     component: () => import("../views/FormCommand.vue")
   },
 ]

@@ -90,7 +90,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title
-              >Votre commande {{ order.length }}</v-list-item-title
+              >Votre commande</v-list-item-title
             >
           </v-list-item-content>
         </v-list-item>
@@ -218,13 +218,12 @@ export default {
     removeOneItem: function (product) {
       var deleted = false;
 
-      for (let i = 0; i < this.order.length; i++) {
+      for (let i = this.order.length - 1; i > 0; i--) {
         if (this.order[i].name == product.name && deleted == false) {
           this.order.splice(i, 1);
           deleted = true;
         }
       }
-      console.log(this.order);
     },
     addOneItem: function (product) {
       var productToAdd = this.order.find(

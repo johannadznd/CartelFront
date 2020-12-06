@@ -9,7 +9,7 @@
     <v-card-subtitle class="d-flex"> {{ product.price }} ‎€ </v-card-subtitle>
 
     <router-link
-      :to="{ name: productDescription, params: { idProduit: product.id } }"
+      :to="{ name: 'product', params: { category: product.id, test: 'sdfsd' } }"
       class="text-decoration-none"
     >
       <v-card-actions>
