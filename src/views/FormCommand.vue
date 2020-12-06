@@ -34,14 +34,16 @@
         required
       ></v-text-field>
       <center>
-        <v-btn
-          large
-          class="ma-5"
-          color="white"
-          elevation="2"
-          style="width: 140px"
-          >annuler</v-btn
-        >
+        <router-link :to="{ name: 'Home' }" class="text-decoration-none">
+          <v-btn
+            large
+            class="ma-5"
+            color="white"
+            elevation="2"
+            style="width: 140px"
+            >annuler</v-btn
+          >
+        </router-link>
         <v-btn
           style="color: white; width: 140px"
           large
@@ -52,7 +54,6 @@
           @click="createCommand()"
           >commander</v-btn
         >
-
       </center>
     </v-form>
   </v-row>
