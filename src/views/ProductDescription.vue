@@ -7,6 +7,7 @@
               max-height="300"
               max-width="450"
               :src="product.picture"
+              lazy-src="https://zupimages.net/up/20/50/jqpo.jpg"
             ></v-img>
             <v-col class="ml-16 pt-5">
               <h2> {{ product.name }}</h2>

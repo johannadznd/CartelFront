@@ -16,14 +16,18 @@ const routes = [
   },
   {
     path: '/form/command',
-    name: 'product',
+    name: 'FormCommand',
     component: () => import("../views/FormCommand.vue")
   },
-
   {
     path: '/product/:id',
     name: 'Product',
     component: () => import("../views/ProductDescription.vue")
+  },
+  {
+    path: '*',
+    name: 'NotFound',
+    component: () => import("../views/NotFound.vue")
   },
 ]
 

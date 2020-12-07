@@ -53,7 +53,7 @@
           md="4"
           lg="3"
         >
-          <ProductCard :product="item"/>
+          <ProductCard :product="item" />
         </v-col>
       </v-row>
     </template>
@@ -101,6 +101,7 @@
       <div v-if="products != undefined">
         {{ setproducts() }}
       </div>
+      <Error />
     </template>
   </v-data-iterator>
 </template>

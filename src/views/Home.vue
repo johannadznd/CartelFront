@@ -2,7 +2,7 @@
   <v-app>
     <v-main>
       <div class="contenant">
-        <v-img height="600" src="../assets/TopImg.png">
+        <v-img height="600" src="../assets/TopImg.png" lazy-src="https://zupimages.net/up/20/50/jqpo.jpg">
           <v-row align="center" justify="center">
             <v-autocomplete
               v-model="select"
@@ -27,6 +27,7 @@
               max-height="300"
               max-width="450"
               src="../assets/Carpet.jpg"
+              lazy-src="https://zupimages.net/up/20/50/jqpo.jpg"
             ></v-img>
             <v-col class="ml-16 pt-5">
               <h2>Tapis</h2>
@@ -38,10 +39,9 @@
               <v-btn
                 style="color: white"
                 x-large
-                class="mt-5 "
+                class="mt-5"
                 color="#32374B"
                 elevation="2"
-              
                 >Découvrir les tapis</v-btn>
               </router-link>
             </v-col>
@@ -68,6 +68,7 @@
               max-height="500"
               max-width="450"
               src="../assets/sleeves.png"
+              lazy-src="https://zupimages.net/up/20/50/jqpo.jpg"
             ></v-img>
           </v-row>
 
@@ -76,6 +77,7 @@
               max-height="400"
               max-width="450"
               src="../assets/box.jpg"
+              lazy-src="https://zupimages.net/up/20/50/jqpo.jpg"
             ></v-img>
             <v-col class="ml-16 pt-5">
               <h2>Boîte pour cartes</h2>

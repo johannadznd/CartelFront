@@ -43,12 +43,23 @@
       </div>
 
       <template v-slot:extension>
+        {{ actualRoute }}
+        <v-select
+          :items="filterCategoriesOnlyName(categories)"
+          label="categories"
+          solo
+          class="ma-2 categories_phone"
+          v-model="page"
+        ></v-select>
+
         <v-tabs
+          class="categories_pc"
           style="padding-left: 8%; margin-right: 20px"
           :optional="productTab"
           v-model="page"
         >
           <button
+            class="categories_pc"
             @click="
               getAllProducts(category.name);
               page = category.id;
@@ -89,9 +100,7 @@
       <center>
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title
-              >Votre commande</v-list-item-title
-            >
+            <v-list-item-title>Votre commande</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -103,7 +112,11 @@
             :key="item.name"
           >
             <v-card class="ma-2">
-              <v-img :src="item.picture" :lazy-src="item.picture"> </v-img>
+              <v-img
+                :src="item.picture"
+                lazy-src="https://zupimages.net/up/20/50/jqpo.jpg"
+              >
+              </v-img>
               <div>
                 <v-list-item-content>
                   <div>article : {{ item.name }} à {{ item.price }} €</div>
@@ -155,6 +168,7 @@
 <script>
 import store from "@/store/index.js";
 export default {
+  watch: {},
   name: "NavBar",
   store: store,
   data() {
@@ -187,6 +201,16 @@ export default {
   computed: {
     order() {
       return store.state.order;
+    },
+    actualRoute() {
+      this.categories.forEach((element) => {
+        if (this.page == element.surname) {
+          this.$router.push({
+            name: "Products",
+            params: { category: element.name },
+          });
+        }
+      });
     },
   },
   methods: {
@@ -229,9 +253,34 @@ export default {
       var productToAdd = this.order.find(
         (element) => element.name == product.name
       );
-      console.log(productToAdd);
       store.commit("addProductToOrder", productToAdd);
+    },
+    filterCategoriesOnlyName(categories) {
+      var filteredCategories = [];
+      categories.forEach((category) => {
+        filteredCategories.push(category.surname);
+      });
+      return filteredCategories;
     },
   },
 };
 </script>
+
+<style>
+@media screen and (max-width: 600px) {
+  .categories_pc {
+    display: none;
+  }
+  .categories_phone {
+    display: flex;
+  }
+}
+@media screen and (min-width: 600px) {
+  .categories_pc {
+    display: flex;
+  }
+  .categories_phone {
+    display: none !important;
+  }
+}
+</style>

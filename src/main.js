@@ -6,6 +6,9 @@ import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false
 
+import Error from '@/components/Error.vue';
+Vue.component('Error', Error);
+
 new Vue({
   router,
   store,

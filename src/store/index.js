@@ -10,6 +10,7 @@ export default new Vuex.Store({
     products: [],
     order: [],
     product:[],
+    error: [],
   },
   actions: {
     async postUser(context, user) {
@@ -24,7 +25,7 @@ export default new Vuex.Store({
           context.commit("setUser", response.data);
         })
         .catch(function (error) {
-          console.log(error);
+          context.commit("setError", error.response);
         });
     },
     async getAllProducts(context) {
@@ -34,7 +35,7 @@ export default new Vuex.Store({
           context.commit("setProducts", response.data);
         })
         .catch(function (error) {
-          console.log(error);
+          context.commit("setError", error.response);
         });
     },
 
@@ -45,7 +46,7 @@ export default new Vuex.Store({
           context.commit("setProduct", response.data);
         })
         .catch(function (error) {
-          console.log(error);
+          context.commit("setError", error.response);
         });
     },
 
@@ -56,7 +57,7 @@ export default new Vuex.Store({
           context.commit("setProducts", response.data);
         })
         .catch(function (error) {
-          console.log(error);
+          context.commit("setError", error.response);
         });
     },
     async postOrder({context, state}, price) {
@@ -72,7 +73,7 @@ export default new Vuex.Store({
           console.log(response.data);
         })
         .catch(function (error) {
-          console.log(error);
+          context.commit("setError", error.response);
         });
     },
   },
@@ -89,12 +90,13 @@ export default new Vuex.Store({
     },
 
     setOrder(state, order) {
-
       state.order = order;
     },
     addProductToOrder(state, product) {
       state.order.push(product);
-      console.log(state.order);
+    },
+    setError(state, error) {
+      state.error = error;
     },
   },
 })
