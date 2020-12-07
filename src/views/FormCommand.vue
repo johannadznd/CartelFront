@@ -54,8 +54,6 @@
           @click="createCommand()"
           >commander</v-btn
         >
-
-        <Error />
       </center>
     </v-form>
   </v-row>

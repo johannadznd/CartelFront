@@ -7,7 +7,7 @@
   >
     <div class="d-flex align-center">
       <v-icon class="mr-2 ml-2" color="white">mdi-alert</v-icon>
-      erreur {{ error.data.status }} : {{ error.data.error }}
+      erreur {{ error.status }} : {{ error.data.error }}
       <v-spacer class="d-flex justify-end">
         <v-btn @click="resetError()" icon color="white"
           ><v-icon> mdi-close </v-icon></v-btn

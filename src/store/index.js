@@ -9,7 +9,7 @@ export default new Vuex.Store({
     user: [],
     products: [],
     order: [],
-    product:[],
+    product: [],
     error: [],
   },
   actions: {
@@ -39,7 +39,7 @@ export default new Vuex.Store({
         });
     },
 
-    async getProductById(context, id ) {
+    async getProductById(context, id) {
       await axios
         .get("product/" + id)
         .then(response => {
@@ -60,7 +60,7 @@ export default new Vuex.Store({
           context.commit("setError", error.response);
         });
     },
-    async postOrder({context, state}, price) {
+    async postOrder({ context, state }, price) {
       await axios
         .post("cardorder/create", {
           price: price,
@@ -100,3 +100,4 @@ export default new Vuex.Store({
     },
   },
 })
+
