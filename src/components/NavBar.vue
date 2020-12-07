@@ -204,11 +204,15 @@ export default {
     },
     actualRoute() {
       this.categories.forEach((element) => {
-        if (this.page == element.surname && this.$router.currentRoute.path != '/products/' + element.name) {
-          this.$router.push({
+        if (
+          this.page == element.surname &&
+          this.$router.currentRoute.path != "/products/" + element.name
+        ) {
+          this.$router.replace({
             name: "Products",
             params: { category: element.name },
           });
+          this.getAllProducts(element.name);
         }
       });
     },
@@ -243,8 +247,8 @@ export default {
       var deleted = false;
 
       for (let i = this.order.length; i > 0; i--) {
-        if (this.order[i-1].name == product.name && deleted == false) {
-          this.order.splice(i-1, 1);
+        if (this.order[i - 1].name == product.name && deleted == false) {
+          this.order.splice(i - 1, 1);
           deleted = true;
         }
       }
