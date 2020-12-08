@@ -2,43 +2,26 @@
   <v-alert
     class="ma-2 white--text"
     elevation="11"
-    color="red"
+    type="error"
     v-if="error.length != 0"
+    dismissible
   >
-    <div class="d-flex align-center">
-      <v-icon class="mr-2 ml-2" color="white">mdi-alert</v-icon>
-      erreur {{ error.status }} : {{ error.data.error }}
-      <v-spacer class="d-flex justify-end">
-        <v-btn @click="resetError()" icon color="white"
-          ><v-icon> mdi-close </v-icon></v-btn
-        >
-      </v-spacer>
-    </div>
+    erreur {{ checkStatus(error.status) }} : {{ error.data.error }}
   </v-alert>
 </template>
 
 <script>
-import store from "@/store/index.js";
 export default {
-  watch: {
-    $route(to, from) {
-      this.resetError();
-    },
-  },
   methods: {
-    resetError() {
-      store.commit("setError", []);
+    checkStatus(status) {
+      if (status == "404") {
+        this.$router.replace({
+          name: "NotFound",
+        });
+      }
     },
   },
   name: "Error",
-  store: store,
-  computed: {
-    error() {
-      if (store.state.error != []) {
-        return store.state.error;
-      }
-      return "";
-    },
-  },
+  props: ["error"],
 };
 </script>

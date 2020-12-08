@@ -10,7 +10,6 @@ export default new Vuex.Store({
     products: [],
     order: [],
     product: [],
-    error: [],
   },
   actions: {
     async postUser(context, user) {
@@ -25,7 +24,7 @@ export default new Vuex.Store({
           context.commit("setUser", response.data);
         })
         .catch(function (error) {
-          context.commit("setError", error.response);
+          return Promise.reject(error)
         });
     },
     async getAllProducts(context) {
@@ -35,7 +34,7 @@ export default new Vuex.Store({
           context.commit("setProducts", response.data);
         })
         .catch(function (error) {
-          context.commit("setError", error.response);
+          return Promise.reject(error)
         });
     },
 
@@ -46,7 +45,7 @@ export default new Vuex.Store({
           context.commit("setProduct", response.data);
         })
         .catch(function (error) {
-          context.commit("setError", error.response);
+          return Promise.reject(error)
         });
     },
 
@@ -57,10 +56,10 @@ export default new Vuex.Store({
           context.commit("setProducts", response.data);
         })
         .catch(function (error) {
-          context.commit("setError", error.response);
+          return Promise.reject(error)
         });
     },
-    async postOrder({ context, state }, price) {
+    async postOrder({ state }, price) {
       await axios
         .post("cardorder/create", {
           price: price,
@@ -73,7 +72,7 @@ export default new Vuex.Store({
           console.log(response.data);
         })
         .catch(function (error) {
-          context.commit("setError", error.response);
+          return Promise.reject(error)
         });
     },
   },
@@ -88,15 +87,11 @@ export default new Vuex.Store({
     setProduct(state, product) {
       state.product = product;
     },
-
     setOrder(state, order) {
       state.order = order;
     },
     addProductToOrder(state, product) {
       state.order.push(product);
-    },
-    setError(state, error) {
-      state.error = error;
     },
   },
 })

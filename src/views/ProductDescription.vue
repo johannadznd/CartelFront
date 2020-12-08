@@ -30,7 +30,7 @@
                 elevation="2"
                 >Acheter ce produit</v-btn
               > </v-card-actions
-            ><Error />
+            ><Error :error="error" />
           </v-col>
         </v-row>
       </v-container>
@@ -47,15 +47,20 @@ export default {
     return {
       idProduct: this.$route.params.id,
       keys: ["name", "price"],
+      error: [],
     };
   },
   methods: {
     addToOrder(product) {
-      store.commit("addProductToOrder", product);
+      store.commit("addProductToOrder", product).catch((error) => {
+        this.error = error.response;
+      });
     },
   },
   mounted: async function () {
-    store.dispatch("getProductById", this.idProduct);
+    store.dispatch("getProductById", this.idProduct).catch((error) => {
+      this.error = error.response;
+    });
   },
 
   computed: {

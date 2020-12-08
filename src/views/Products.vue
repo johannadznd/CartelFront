@@ -101,7 +101,7 @@
       <div v-if="products != undefined">
         {{ setproducts() }}
       </div>
-      <Error />
+      <Error :error="error"/>
     </template>
   </v-data-iterator>
 </template>
@@ -127,6 +127,7 @@ export default {
       sortBy: "name",
       keys: ["name", "price"],
       items: [],
+      error: [],
     };
   },
   computed: {
@@ -144,7 +145,9 @@ export default {
     },
   },
   mounted: async function () {
-    store.dispatch("getAllProductsWithCategory", this.category);
+    store.dispatch("getAllProductsWithCategory", this.category).catch((error) => {
+      this.error = error.response;
+    });
   },
 
   methods: {

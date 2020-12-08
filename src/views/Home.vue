@@ -2,7 +2,11 @@
   <v-app>
     <v-main>
       <div class="contenant">
-        <v-img height="600" src="../assets/TopImg.png" lazy-src="https://zupimages.net/up/20/50/jqpo.jpg">
+        <v-img
+          height="600"
+          src="../assets/TopImg.png"
+          lazy-src="https://zupimages.net/up/20/50/jqpo.jpg"
+        >
           <v-row align="center" justify="center">
             <v-autocomplete
               v-model="select"
@@ -21,6 +25,7 @@
             ></v-autocomplete>
           </v-row>
         </v-img>
+        <Error :error="error"/>
         <v-container v-if="search == null || search.length == 0">
           <v-row class="mt-10">
             <v-img
@@ -36,13 +41,14 @@
                 de vos rêves.
               </p>
               <router-link to="products/carpet" class="text-decoration-none">
-              <v-btn
-                style="color: white"
-                x-large
-                class="mt-5"
-                color="#32374B"
-                elevation="2"
-                >Découvrir les tapis</v-btn>
+                <v-btn
+                  style="color: white"
+                  x-large
+                  class="mt-5"
+                  color="#32374B"
+                  elevation="2"
+                  >Découvrir les tapis</v-btn
+                >
               </router-link>
             </v-col>
           </v-row>
@@ -55,13 +61,14 @@
                 de vos rêves.
               </p>
               <router-link to="products/sleeve" class="text-decoration-none">
-              <v-btn
-                style="color: white"
-                x-large
-                class="mt-5"
-                color="#32374B"
-                elevation="2"
-                >Découvrir les protèges</v-btn>
+                <v-btn
+                  style="color: white"
+                  x-large
+                  class="mt-5"
+                  color="#32374B"
+                  elevation="2"
+                  >Découvrir les protèges</v-btn
+                >
               </router-link>
             </v-col>
             <v-img
@@ -86,13 +93,14 @@
                 celles de vos rêves .
               </p>
               <router-link to="products/box" class="text-decoration-none">
-              <v-btn
-                style="color: white"
-                x-large
-                class="mt-5"
-                color="#32374B"
-                elevation="2"
-                >Découvrir les boîtes</v-btn>
+                <v-btn
+                  style="color: white"
+                  x-large
+                  class="mt-5"
+                  color="#32374B"
+                  elevation="2"
+                  >Découvrir les boîtes</v-btn
+                >
               </router-link>
             </v-col>
           </v-row>
@@ -131,6 +139,7 @@ export default {
       search: null,
       select: null,
       products: [],
+      error: [],
     };
   },
   store: store,
@@ -176,7 +185,12 @@ export default {
     },
   },
   mounted: function () {
-    store.dispatch("getAllProducts").then(() => this.setProducts());
+    store
+      .dispatch("getAllProducts")
+      .then(() => this.setProducts())
+      .catch((error) => {
+        this.error = error.response;
+      });
   },
 };
 </script>

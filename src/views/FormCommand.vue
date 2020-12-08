@@ -55,6 +55,7 @@
           >commander</v-btn
         >
       </center>
+      <Error :error="error"/>
     </v-form>
   </v-row>
 </template>
@@ -81,7 +82,7 @@ export default {
         email: "email@gmail.com",
         address: "214 rue de la cheval",
       },
-      store: "",
+      error: [],
     };
   },
   methods: {
@@ -97,7 +98,10 @@ export default {
     createCommand() {
       store
         .dispatch("postUser", this.user)
-        .then(() => store.dispatch("postOrder", "12"));
+        .then(() => store.dispatch("postOrder", "12"))
+        .catch((error) => {
+          this.error = error.response;
+        });
     },
   },
   computed: {

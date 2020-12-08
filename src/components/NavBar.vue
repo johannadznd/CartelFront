@@ -41,7 +41,7 @@
           </router-link>
         </button>
       </div>
-
+      <Error :error="error" />
       <template v-slot:extension>
         {{ actualRoute }}
         <v-select
@@ -51,7 +51,6 @@
           class="ma-2 categories_phone"
           v-model="page"
         ></v-select>
-
         <v-tabs
           class="categories_pc"
           style="padding-left: 8%; margin-right: 20px"
@@ -196,6 +195,7 @@ export default {
           route: "Products",
         },
       ],
+      error: [],
     };
   },
   computed: {
@@ -219,7 +219,9 @@ export default {
   },
   methods: {
     getAllProducts: function (category) {
-      store.dispatch("getAllProductsWithCategory", category);
+      store.dispatch("getAllProductsWithCategory", category).catch((error) => {
+        this.error = error.response;
+      });
     },
     organizingProducts: function (products) {
       var organizeProducts = [];
