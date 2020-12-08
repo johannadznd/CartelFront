@@ -7,6 +7,7 @@
     :sort-by="sortBy.toLowerCase()"
     :sort-desc="sortDesc"
     hide-default-footer
+    disable-filtering
     class="pa-4"
   >
     <template v-slot:header>
@@ -53,7 +54,9 @@
           md="4"
           lg="3"
         >
-          <ProductCard :product="item" />
+          <div v-if="item.name.includes(search.toLowerCase()) == true">
+            <ProductCard :product="item" />
+          </div>
         </v-col>
       </v-row>
     </template>
@@ -101,7 +104,7 @@
       <div v-if="products != undefined">
         {{ setproducts() }}
       </div>
-      <Error :error="error"/>
+      <Error :error="error" />
     </template>
   </v-data-iterator>
 </template>
@@ -145,9 +148,11 @@ export default {
     },
   },
   mounted: async function () {
-    store.dispatch("getAllProductsWithCategory", this.category).catch((error) => {
-      this.error = error.response;
-    });
+    store
+      .dispatch("getAllProductsWithCategory", this.category)
+      .catch((error) => {
+        this.error = error.response;
+      });
   },
 
   methods: {
