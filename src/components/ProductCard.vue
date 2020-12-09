@@ -2,7 +2,7 @@
   <v-card class="mx-auto" max-width="344">
     <v-img
       :src="product.picture"
-      lazy-src="https://zupimages.net/up/20/50/jqpo.jpg"
+      lazy-src="assets/blanc.png"
       height="200px"
     ></v-img>
 
