@@ -102,7 +102,9 @@ export default {
         .catch((error) => {
         this.error = error.response;
         });
+
       this.$router.push({ name: 'Home' })
+
     },
   },
   computed: {
