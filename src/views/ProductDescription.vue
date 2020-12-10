@@ -14,7 +14,7 @@
             <h2 class="text-center">{{ product.name }}</h2>
 
              <v-row justify="center" class="mt-5">
-              <v-expansion-panels inset>
+              <v-expansion-panels inset  >
                 <v-expansion-panel>
                   <v-expansion-panel-header>Description</v-expansion-panel-header>
                   <v-expansion-panel-content>
@@ -60,9 +60,7 @@ export default {
   },
   methods: {
     addToOrder(product) {
-      store.commit("addProductToOrder", product).catch((error) => {
-        this.error = error.response;
-      });
+      store.commit("addProductToOrder", product);
     },
   },
   mounted: async function () {
