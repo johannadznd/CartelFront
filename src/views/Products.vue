@@ -47,16 +47,14 @@
     <template v-slot:default="props">
       <v-row>
         <v-col
-          v-for="item in props.items"
+          v-for="item in includeProduct(props.items)"
           :key="item.name"
           cols="12"
           sm="6"
           md="4"
           lg="3"
         >
-          <div v-if="item.name.includes(search.toLowerCase()) == true">
-            <ProductCard :product="item" />
-          </div>
+          <ProductCard :product="item" />
         </v-col>
       </v-row>
     </template>
@@ -167,6 +165,18 @@ export default {
     },
     updateItemsPerPage(number) {
       this.itemsPerPage = number;
+    },
+    includeProduct(products) {
+      if (this.search == null) {
+        return products;
+      }
+      var filteredProducts = [];
+      products.forEach((element) => {
+        if (element.name.includes(this.search.toLowerCase()) == true) {
+          filteredProducts.push(element);
+        }
+      });
+      return filteredProducts;
     },
   },
 };

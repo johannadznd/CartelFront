@@ -52,9 +52,7 @@ export default {
   },
   methods: {
     addToOrder(product) {
-      store.commit("addProductToOrder", product).catch((error) => {
-        this.error = error.response;
-      });
+      store.commit("addProductToOrder", product);
     },
   },
   mounted: async function () {
