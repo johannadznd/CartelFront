@@ -121,7 +121,6 @@
                   <div>article : {{ item.name }} à {{ item.price }} €</div>
                   <div class="d-flex justify-center align-center">
                     quantité :
-
                     <v-icon
                       @click="removeOneItem(item)"
                       large
@@ -149,6 +148,7 @@
             :to="{ name: 'FormCommand' }"
             class="text-decoration-none"
           >
+          <p>{{total}}</p>
             <v-btn
               style="color: white; width: 140px"
               large
@@ -170,6 +170,7 @@ export default {
   watch: {},
   name: "NavBar",
   store: store,
+  
   data() {
     return {
       drawer: false,
@@ -216,6 +217,17 @@ export default {
         }
       });
     },
+
+     total () {
+                var total = 0;
+                var totalItem = 0;
+                this.order.forEach(function(product) {
+                  total += product.price;
+                  console.log(product.price)
+
+                });
+                return total.toFixed(2);
+            },
   },
   methods: {
     getAllProducts: function (category) {

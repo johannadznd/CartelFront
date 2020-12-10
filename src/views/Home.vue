@@ -5,7 +5,7 @@
         <v-img
           height="600"
           src="../assets/TopImg.png"
-          lazy-src="https://zupimages.net/up/20/50/jqpo.jpg"
+          lazy-src="assets/blanc.png"
         >
           <v-row align="center" justify="center">
             <v-autocomplete
@@ -32,7 +32,7 @@
               max-height="300"
               max-width="450"
               src="../assets/Carpet.jpg"
-              lazy-src="https://zupimages.net/up/20/50/jqpo.jpg"
+              lazy-src="assets/blanc.png"
             ></v-img>
             <v-col class="ml-16 pt-5">
               <h2>Tapis</h2>
@@ -75,7 +75,7 @@
               max-height="500"
               max-width="450"
               src="../assets/sleeves.png"
-              lazy-src="https://zupimages.net/up/20/50/jqpo.jpg"
+              lazy-src="assets/blanc.png"
             ></v-img>
           </v-row>
 
@@ -84,7 +84,7 @@
               max-height="400"
               max-width="450"
               src="../assets/box.jpg"
-              lazy-src="https://zupimages.net/up/20/50/jqpo.jpg"
+              lazy-src="assets/blanc.png"
             ></v-img>
             <v-col class="ml-16 pt-5">
               <h2>Boîte pour cartes</h2>

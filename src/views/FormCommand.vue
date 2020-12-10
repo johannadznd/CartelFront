@@ -51,7 +51,7 @@
           color="#32374B"
           elevation="2"
           :disabled="!valid"
-          @click="createCommand()"
+          @click.prevent="createCommand()"
           >commander</v-btn
         >
       </center>
@@ -100,8 +100,11 @@ export default {
         .dispatch("postUser", this.user)
         .then(() => store.dispatch("postOrder", "12"))
         .catch((error) => {
-          this.error = error.response;
+        this.error = error.response;
         });
+
+      this.$router.push({ name: 'Home' })
+
     },
   },
   computed: {
