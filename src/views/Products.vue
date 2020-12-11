@@ -172,7 +172,7 @@ export default {
       }
       var filteredProducts = [];
       products.forEach((element) => {
-        if (element.name.includes(this.search.toLowerCase()) == true) {
+        if (element.name.toLowerCase().includes(this.search.toLowerCase()) == true) {
           filteredProducts.push(element);
         }
       });

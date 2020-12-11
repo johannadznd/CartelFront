@@ -110,7 +110,7 @@
             v-for="item in organizingProducts(order)"
             :key="item.name"
           >
-            <v-card class="ma-2">
+            <v-card class="mr-2 mb-2 mt-3">
               <v-img
                 :src="item.picture"
                 lazy-src="https://zupimages.net/up/20/50/jqpo.jpg"
@@ -120,35 +120,28 @@
                 <v-list-item-content>
                   <div>article : {{ item.name }} à {{ item.price }} €</div>
                   <div class="d-flex justify-center align-center">
-                    quantité :
-                    <v-icon
-                      @click="removeOneItem(item)"
+                    <v-btn
+                      style="color: white; width: 140px"
                       large
-                      color="orange darken-2"
+                      class="ma-5"
+                      color="#32374B"
+                      elevation="2"
+                      @click.prevent="removeOneItem(item)"
+                      >retirer</v-btn
                     >
-                      mdi-minus
-                    </v-icon>
-                    <div class="d-flex justify-center align-center">
-                      {{ item.number }}
-                    </div>
-
-                    <v-icon
-                      @click="addOneItem(item)"
-                      large
-                      color="orange darken-2"
-                    >
-                      mdi-plus
-                    </v-icon>
                   </div>
                 </v-list-item-content>
               </div>
             </v-card>
           </v-list-item>
+          <v-card class="ml-5 mr-4 mt-5" elevation="4" v-if="total != null && total != 0">
+            <p class="pt-2">Total de la commande :</p>
+            <p class="pb-2">{{ total }} €</p></v-card
+          >
           <router-link
             :to="{ name: 'FormCommand' }"
             class="text-decoration-none"
           >
-            <p>{{ total }}</p>
             <v-btn
               style="color: white; width: 140px"
               large
@@ -224,10 +217,7 @@ export default {
       this.order.forEach(function (product) {
         total += product.price;
       });
-      if(total != 0) {
-        return total.toFixed(2);
-      }
-      return null;
+      return total.toFixed(2);
     },
   },
   methods: {
@@ -267,12 +257,6 @@ export default {
           deleted = true;
         }
       }
-    },
-    addOneItem: function (product) {
-      var productToAdd = this.order.find(
-        (element) => element.name == product.name
-      );
-      store.commit("addProductToOrder", productToAdd);
     },
     filterCategoriesOnlyName(categories) {
       var filteredCategories = [];

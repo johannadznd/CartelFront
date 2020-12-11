@@ -3,7 +3,7 @@
     class="ma-2 white--text"
     elevation="11"
     type="error"
-    v-if="error.length != 0"
+    v-if="error != undefined && error.length != 0"
     dismissible
   >
     erreur {{ checkStatus(error.status) }} : {{ error.data.error }}

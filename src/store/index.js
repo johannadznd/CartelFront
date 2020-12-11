@@ -64,12 +64,9 @@ export default new Vuex.Store({
         .post("cardorder/create", {
           price: price,
           creation: new Date(),
-          adress: "adress",
+          adress: state.user.adress,
           user: state.user,
           products: state.order
-        })
-        .then(response => {
-          console.log(response.data);
         })
         .catch(function (error) {
           return Promise.reject(error)
@@ -90,8 +87,18 @@ export default new Vuex.Store({
     setOrder(state, order) {
       state.order = order;
     },
-    addProductToOrder(state, product) {
-      state.order.push(product);
+    addProductToOrder(state, productToAdd) {
+      var containProductAlready = false;
+      if(state.order.length != 0) {
+        state.order.forEach((product) => {
+          if (product.name == productToAdd.name) {
+            containProductAlready = true;
+          }
+        });
+      }
+      if (containProductAlready == false) {
+        state.order.push(productToAdd);
+      }
     },
   },
 })

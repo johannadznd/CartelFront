@@ -55,7 +55,14 @@
           >commander</v-btn
         >
       </center>
-      <Error :error="error"/>
+      <div v-if="success">
+        <v-alert type="success" elevation="10"
+          >Commande crée! Vous allez etre rédirigé vers l'accueil</v-alert
+        >
+        <v-progress-linear indeterminate color="cyan"></v-progress-linear>
+        {{ redirectToMenu() }}
+      </div>
+      <Error :error="error" />
     </v-form>
   </v-row>
 </template>
@@ -77,15 +84,24 @@ export default {
       },
       select: null,
       user: {
-        firstName: "firstName",
-        lastName: "lastName",
-        email: "email@gmail.com",
-        address: "214 rue de la cheval",
+        firstName: "",
+        lastName: "",
+        email: "",
+        address: "",
       },
       error: [],
+      success: false,
     };
   },
   methods: {
+    total() {
+      var total = 0;
+      var totalItem = 0;
+      this.order.forEach(function (product) {
+        total += product.price;
+      });
+      return total.toFixed(2);
+    },
     validate() {
       this.$refs.form.validate();
     },
@@ -98,18 +114,30 @@ export default {
     createCommand() {
       store
         .dispatch("postUser", this.user)
-        .then(() => store.dispatch("postOrder", "12"))
+        .then(() =>
+          store
+            .dispatch("postOrder", this.total())
+            .catch((error) => {
+              this.error = error.response;
+            })
+            .then(() => (this.success = true))
+        )
         .catch((error) => {
-        this.error = error.response;
+          this.error = error.response;
         });
-
-      this.$router.push({ name: 'Home' })
-
+    },
+    redirectToMenu() {
+      setTimeout(() => {
+        this.$router.push({ name: "Home" });
+      }, 1500);
     },
   },
   computed: {
     getuser() {
       return store.state.user;
+    },
+    order() {
+      return store.state.order;
     },
   },
 };

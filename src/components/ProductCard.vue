@@ -16,7 +16,7 @@
       :to="{ name: 'Product', params: { id: product.id } }"
       class="text-decoration-none"
     >
-      <v-btn color="grey white--text lighten-2" text> Acheter </v-btn>
+      <v-btn color="grey white--text lighten-2" class="mb-2 ml-2" text> Acheter </v-btn>
     </router-link>
   </v-card>
 </template>

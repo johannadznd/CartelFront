@@ -10,7 +10,6 @@
           <v-row align="center" justify="center">
             <v-autocomplete
               v-model="select"
-              :loading="loading"
               :items="items"
               :search-input.sync="search"
               cache-items
@@ -25,7 +24,7 @@
             ></v-autocomplete>
           </v-row>
         </v-img>
-        <Error :error="error"/>
+        <Error :error="error" />
         <v-container v-if="search == null || search.length == 0">
           <v-row class="mt-10">
             <v-img
@@ -106,7 +105,7 @@
           </v-row>
         </v-container>
         <v-container v-else>
-          <v-row>
+          <v-row v-if="items.length != 0">
             <v-col
               v-for="item in testContainProductsInput(getProducts)"
               :key="item.name"
@@ -118,6 +117,8 @@
               <ProductCard :product="item" />
             </v-col>
           </v-row>
+
+          <v-alert v-else class="mt-4" elevation="10" type="warning">Le produit que vous recherchez n'existe pas ou n'est plus disponible</v-alert>
         </v-container>
       </div>
     </v-main>
@@ -134,7 +135,6 @@ export default {
   },
   data() {
     return {
-      loading: false,
       items: [],
       search: null,
       select: null,
@@ -150,13 +150,9 @@ export default {
   },
   methods: {
     querySelections(v) {
-      this.loading = true;
-      setTimeout(() => {
-        this.items = this.products.filter((e) => {
-          return (e || "").toLowerCase().indexOf((v || "").toLowerCase()) > -1;
-        });
-        this.loading = false;
-      }, 500);
+      this.items = this.products.filter((e) => {
+        return (e || "").toLowerCase().indexOf((v || "").toLowerCase()) > -1;
+      });
     },
     setProducts() {
       this.getProducts.forEach((product) => this.products.push(product.name));
