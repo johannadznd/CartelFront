@@ -148,7 +148,7 @@
             :to="{ name: 'FormCommand' }"
             class="text-decoration-none"
           >
-          <p>{{total}}</p>
+            <p>{{ total }}</p>
             <v-btn
               style="color: white; width: 140px"
               large
@@ -170,7 +170,7 @@ export default {
   watch: {},
   name: "NavBar",
   store: store,
-  
+
   data() {
     return {
       drawer: false,
@@ -218,16 +218,17 @@ export default {
       });
     },
 
-     total () {
-                var total = 0;
-                var totalItem = 0;
-                this.order.forEach(function(product) {
-                  total += product.price;
-                  console.log(product.price)
-
-                });
-                return total.toFixed(2);
-            },
+    total() {
+      var total = 0;
+      var totalItem = 0;
+      this.order.forEach(function (product) {
+        total += product.price;
+      });
+      if(total != 0) {
+        return total.toFixed(2);
+      }
+      return null;
+    },
   },
   methods: {
     getAllProducts: function (category) {

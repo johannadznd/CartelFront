@@ -3,7 +3,7 @@
     <v-img
       :src="product.picture"
       lazy-src="assets/blanc.png"
-      height="200px"
+      height="40vh"
     ></v-img>
 
     <v-card-title>
