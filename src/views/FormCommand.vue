@@ -128,8 +128,12 @@ export default {
     },
     redirectToMenu() {
       setTimeout(() => {
+        this.resetOrder();
         this.$router.push({ name: "Home" });
-      }, 1500);
+      }, 2000);
+    },
+    resetOrder() {
+      store.commit("setOrder", []);
     },
   },
   computed: {
